@@ -1,6 +1,18 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
+import {
+  Box,
+  Container,
+  Typography,
+  Button,
+  TextField,
+  Card,
+  CardContent,
+  CardActions,
+  IconButton,
+} from '@mui/material';
+import { Add, Edit, Delete } from '@mui/icons-material';
 
 type TodoTypes = {
   id: string;
@@ -88,31 +100,74 @@ function App() {
 
   return (
     <>
-      <form onSubmit={handleSubmit(addTodo)}>
-        <input {...register('todo')} type="text" />
-        <button type="submit">add</button>
-      </form>
-      {todos.map((todo) => (
-        <div key={todo.id} style={{ display: 'flex' }}>
-          {isEdit.id === todo.id ? (
-            <form onSubmit={handleSubmit(editTodo)}>
-              <input {...register('editTodoName')} type="text" />
-              <button>send</button>
-            </form>
-          ) : (
-            <>
-              <p>{todo.todo}</p>
-              <button
-                onClick={() => setIsEdit({ id: todo.id, todo: todo.todo })}
-              >
-                edit
-              </button>
-            </>
-          )}
-
-          <button onClick={() => deleteTodo(todo.id)}>delete</button>
-        </div>
-      ))}
+      <Container maxWidth="sm">
+        <Box sx={{ mt: 4 }}>
+          <Typography variant="h4" align="center">
+            TodoList
+          </Typography>
+          <form onSubmit={handleSubmit(addTodo)}>
+            <Box sx={{ display: 'flex', alignItems: 'center', mt: 2 }}>
+              <TextField
+                {...register('todo')}
+                type="text"
+                label="New Todo"
+                variant="outlined"
+                fullWidth
+              />
+              <IconButton type="submit" color="primary" aria-label="add todo">
+                <Add />
+              </IconButton>
+            </Box>
+          </form>
+          <Box sx={{ mt: 3 }}>
+            {todos.map((todo) => (
+              <Card key={todo.id} sx={{ mb: 2 }}>
+                <CardContent>
+                  {isEdit.id === todo.id ? (
+                    <form onSubmit={handleSubmit(editTodo)}>
+                      <TextField
+                        {...register('editTodoName')}
+                        type="text"
+                        defaultValue={todo.todo}
+                        variant="standard"
+                        fullWidth
+                      />
+                    </form>
+                  ) : (
+                    <Typography variant="body1">{todo.todo}</Typography>
+                  )}
+                </CardContent>
+                <CardActions>
+                  {isEdit.id === todo.id ? (
+                    <Button
+                      type="submit"
+                      color="primary"
+                      onClick={handleSubmit(editTodo)}
+                    >
+                      Send
+                    </Button>
+                  ) : (
+                    <IconButton
+                      color="primary"
+                      onClick={() =>
+                        setIsEdit({ id: todo.id, todo: todo.todo })
+                      }
+                    >
+                      <Edit />
+                    </IconButton>
+                  )}
+                  <IconButton
+                    color="secondary"
+                    onClick={() => deleteTodo(todo.id)}
+                  >
+                    <Delete />
+                  </IconButton>
+                </CardActions>
+              </Card>
+            ))}
+          </Box>
+        </Box>
+      </Container>
     </>
   );
 }
