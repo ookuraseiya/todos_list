@@ -112,6 +112,7 @@ function App() {
                 type="text"
                 label="New Todo"
                 variant="outlined"
+                required
                 fullWidth
               />
               <IconButton type="submit" color="primary" aria-label="add todo">
@@ -144,7 +145,7 @@ function App() {
                       color="primary"
                       onClick={handleSubmit(editTodo)}
                     >
-                      Send
+                      Edit
                     </Button>
                   ) : (
                     <IconButton
