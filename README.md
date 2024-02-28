@@ -9,9 +9,10 @@ MySQLはこれまでPHPやJavaでしか触ったことがないので、TypeScri
 # 使用技術
 
 - HTML
-- SCSS(CSS)
+- CSS
 - TypeScript
 - React.js
+- Material UI
 - Node.js
 - Express
 - MySQL
