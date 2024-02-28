@@ -16,6 +16,7 @@ TypeScriptを使用してMySQLを触ってみたかったのと、自分が使�
 - Express
 - MySQL
 - Vite
+- Windows
 - Visual Studio Code
 - GitHub
 
