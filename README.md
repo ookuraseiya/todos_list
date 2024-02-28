@@ -12,11 +12,11 @@ MySQLはこれまでPHPやJavaでしか触ったことがないので、TypeScri
 - CSS
 - TypeScript
 - React.js
-- Material UI
 - Node.js
 - Express
 - MySQL
 - Vite
+- Material UI
 - Windows
 - Visual Studio Code
 - GitHub
