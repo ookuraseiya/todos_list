@@ -70,7 +70,7 @@ app.put("/update", (req: Request, res: Response) => {
 
 try {
   app.listen(PORT, () => {
-    console.log(`server running at://localhost:${PORT}`);
+    console.log(`server running PORT:${PORT}`);
   });
 } catch (e) {
   if (e instanceof Error) {

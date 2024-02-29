@@ -19,19 +19,18 @@ type TodoTypes = {
   todo: string;
 };
 
-type ChangeTodoType = {
+type ChangeTodoTypes = {
   todo: string;
   editTodoName: string;
 };
 
 function App() {
-  const { register, handleSubmit, reset } = useForm<ChangeTodoType>();
+  const { register, handleSubmit, reset } = useForm<ChangeTodoTypes>();
   const [todos, setTodos] = useState<TodoTypes[]>([]);
   const [isEdit, setIsEdit] = useState({ id: '', todo: '' });
 
-  const addTodo = async (event: ChangeTodoType) => {
+  const addTodo = async (event: ChangeTodoTypes) => {
     const { todo } = event;
-    console.log(todo);
     await axios
       .post('http://localhost:3000/add', {
         data: {
@@ -39,7 +38,6 @@ function App() {
         },
       })
       .then((response) => {
-        console.log(response.data);
         const todo = response.data;
         setTodos((preTodos) => [todo, ...preTodos]);
       })
@@ -57,8 +55,7 @@ function App() {
           id,
         },
       })
-      .then((response) => {
-        console.log(response);
+      .then(() => {
         const newTodos = todos.filter((todo) => todo.id !== id);
         setTodos(newTodos);
       })
@@ -68,7 +65,7 @@ function App() {
       });
   };
 
-  const editTodo = async ({ editTodoName }: ChangeTodoType) => {
+  const editTodo = async ({ editTodoName }: ChangeTodoTypes) => {
     await axios
       .put('http://localhost:3000/update', {
         data: {
@@ -77,7 +74,6 @@ function App() {
         },
       })
       .then((response) => {
-        console.log(response.data);
         const newTodos = todos.map((todo) => {
           return todo.id === response.data.id ? response.data : todo;
         });
@@ -92,7 +88,6 @@ function App() {
 
   useEffect(() => {
     axios.get('http://localhost:3000').then((response) => {
-      console.log(response.data.todos);
       const { todos } = response.data;
       setTodos(todos);
     });
