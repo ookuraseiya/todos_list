@@ -32,7 +32,7 @@ function App() {
   const addTodo = async (event: ChangeTodoTypes) => {
     const { todo } = event;
     await axios
-      .post('http://localhost:3000/add', {
+      .post('http://localhost:3000/todos/add', {
         data: {
           todo,
         },
@@ -50,7 +50,7 @@ function App() {
     console.log(id);
 
     await axios
-      .delete('http://localhost:3000/delete', {
+      .delete('http://localhost:3000/todos/delete', {
         data: {
           id,
         },
@@ -67,7 +67,7 @@ function App() {
 
   const editTodo = async ({ editTodoName }: ChangeTodoTypes) => {
     await axios
-      .put('http://localhost:3000/update', {
+      .put('http://localhost:3000/todos/update', {
         data: {
           id: isEdit.id,
           todo: editTodoName,
@@ -87,7 +87,7 @@ function App() {
   };
 
   useEffect(() => {
-    axios.get('http://localhost:3000').then((response) => {
+    axios.get('http://localhost:3000/todos').then((response) => {
       const { todos } = response.data;
       setTodos(todos);
     });
